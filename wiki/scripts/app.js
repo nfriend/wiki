@@ -1,9 +1,12 @@
-﻿new Vue({
+﻿var isLocal = document.location.hostname === 'localhost' || document.location.hostname === '127.0.0.1';
+var pageName = isLocal ? getURLParameter('page') : decodeURI(location.pathname.substring(1, location.pathname.length))
+
+var vue = new Vue({
     el: '#app',
     data: {
-        input: 'Here\'s a new page for you',
-        isEditing: getURLParameter('editor') === 'true',
-        title: getURLParameter('page')
+        pageContent: 'Here\'s a new page for you',
+        isEditing: false,
+        title: pageName
     },
     filters: {
         marked: marked,
@@ -19,6 +22,12 @@
         }
     },
     methods: {
+        loadContent: function () {
+            console.log('hre!');
+            setTimeout(function () { this.pageContent = 'sdfsdsdfsdf'; }, 400);
+            
+        },
+
         onBodyKeydown: function(e) {
 
             // ctrl + e or ctrl + shift + e to edit
@@ -61,7 +70,20 @@
     }
 });
 
+$.ajax({
+    type: "POST",
+    url: 'server/get-page.php',
+    data: {
+        pageName: pageName
+    },
+    success: function (response) {
+        vue.pageContent = response;
+    },
+    dataType: 'text'
+});
+
 // from http://stackoverflow.com/a/11582513/1063392
 function getURLParameter(name) {
+    console.log(location.search);
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
 }

@@ -5,6 +5,7 @@ ErrorDocument 404 /404.html
 	RewriteCond %{HTTP_HOST} ^wiki.nathanfriend.com$
 	RewriteRule ^(.*)?$ http://wiki.nathanfriend.io/$1 [R=301,L]
 
+	RewriteCond %{REQUEST_URI} !\.(?:css|png|jpg|jpeg|gif|js|php)$ [NC]
 	RewriteRule ([A-Za-z0-9]+) index.html?page=$1 [NC]
 </IfModule>
 

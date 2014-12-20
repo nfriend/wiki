@@ -8,7 +8,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
-<body id="app" v-on="keydown: onBodyKeydown">
+<body id="app" v-on="keydown: onBodyKeydown, load: loadContent">
     <div id="toolbar" v-class="editor: isEditing">
         <div id="toolbar-inner-container">
             <h1 id="title">{{title}}</h1>
@@ -33,10 +33,11 @@
     </div>
     <div class="cleared" ></div>
     <div id="editor" v-class="editor: isEditing">
-        <textarea v-model="input"></textarea>
-        <div v-html="input | marked"></div>
+        <textarea v-model="pageContent"></textarea>
+        <div v-html="pageContent | marked"></div>
     </div>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.4/vue.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
