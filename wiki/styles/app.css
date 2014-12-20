@@ -6,18 +6,29 @@ body,
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333;
 }
-textarea,
+#editor {
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
+  transition: width 0.25s ease-in-out;
+}
+#editor textarea,
 #editor div {
-  display: inline-block;
-  width: 49%;
+  position: relative;
   height: 100%;
   vertical-align: top;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box;
   padding: 0 20px;
+  box-sizing: border-box;
+  float: left;
 }
-textarea {
+#editor div {
+  left: 0;
+  width: 99%;
+  transition: width 0.25s ease-in-out;
+}
+#editor textarea {
   border: none;
   border-right: 1px solid #ccc;
   resize: none;
@@ -25,7 +36,22 @@ textarea {
   background-color: #f6f6f6;
   font-size: 14px;
   font-family: 'Monaco', courier, monospace;
+  padding: 0;
+  width: 0;
+  transition: width 0.25s ease-in-out, padding 0.25s ease-in-out, opacity 0.25s linear;
+  left: 0;
+  opacity: 0;
+}
+#editor.editor {
+  width: 100%;
+}
+#editor.editor textarea {
+  width: 50%;
   padding: 20px;
+  opacity: 1;
+}
+#editor.editor div {
+  width: 50%;
 }
 code {
   color: #f66;

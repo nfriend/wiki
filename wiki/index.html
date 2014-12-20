@@ -5,8 +5,8 @@
 
     <link rel="stylesheet" type="text/css" href="styles/app.min.css" />
 </head>
-<body>
-    <div id="editor">
+<body id="app" v-on="keydown: onBodyKeydown">
+    <div id="editor" v-class="editor: editor">
         <textarea v-model="input"></textarea>
         <div v-html="input | marked"></div>
     </div>
