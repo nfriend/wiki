@@ -1,0 +1,11 @@
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTP_HOST} ^wiki.nathanfriend.com$
+	RewriteRule ^(.*)?$ http://wiki.nathanfriend.io/$1 [R=301,L]
+
+	RewriteRule ([A-Za-z0-9]+) index.html?page=$1 [NC]
+</IfModule>
+
+

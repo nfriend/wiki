@@ -3,10 +3,36 @@
 <head>
     <title>Nathan Friend: Wiki</title>
 
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap-buttons.min.css" />
     <link rel="stylesheet" type="text/css" href="styles/app.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
 <body id="app" v-on="keydown: onBodyKeydown">
-    <div id="editor" v-class="editor: editor">
+    <div id="toolbar" v-class="editor: isEditing">
+        <div id="toolbar-inner-container">
+            <h1 id="title">{{title}}</h1>
+            <div id="button-container">
+                <button v-if="!isEditing" class="btn btn-default" v-on="click: new" title="Creat a new page">
+                    <i class="fa fa-plus"></i>&nbsp;&nbsp;New Page
+                </button>
+                <button v-if="!isEditing" class="btn btn-default" v-on="click: delete" title="Delete {{title}}">
+                    <i class="fa fa-trash"></i>&nbsp;&nbsp;Delete
+                </button>
+                <button v-if="!isEditing" class="btn btn-default" v-on="click: edit" title="Edit {{title}}">
+                    <i class="fa fa-edit"></i>&nbsp;&nbsp;Edit
+                </button>
+                <button v-if="isEditing" class="btn btn-default" v-on="click: save" title="Save {{title}}">
+                    <i class="fa fa-save"></i>&nbsp;&nbsp;Save
+                </button>
+                <button v-if="isEditing" class="btn btn-default" v-on="click: cancel" title="Cancel editing and don't make any changes to {{title}}">
+                    <i class="fa fa-remove"></i>&nbsp;&nbsp;Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="cleared" ></div>
+    <div id="editor" v-class="editor: isEditing">
         <textarea v-model="input"></textarea>
         <div v-html="input | marked"></div>
     </div>
