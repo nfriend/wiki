@@ -13,9 +13,9 @@
         <div id="toolbar-inner-container">
             <h1 id="title">{{title}}</h1>
             <div id="button-container">
-                <button v-if="!isEditing" class="btn btn-default" v-on="click: new" title="Creat a new page">
+                <!--<button v-if="!isEditing" class="btn btn-default" v-on="click: new" title="Creat a new page">
                     <i class="fa fa-plus"></i>&nbsp;&nbsp;New Page
-                </button>
+                </button>-->
                 <button v-if="!isEditing" class="btn btn-default" v-on="click: delete" title="Delete {{title}}">
                     <i class="fa fa-trash"></i>&nbsp;&nbsp;Delete
                 </button>
@@ -25,16 +25,16 @@
                 <button v-if="isEditing" class="btn btn-default" v-on="click: save" title="Save {{title}}">
                     <i class="fa fa-save"></i>&nbsp;&nbsp;Save
                 </button>
-                <button v-if="isEditing" class="btn btn-default" v-on="click: cancel" title="Cancel editing and don't make any changes to {{title}}">
+                <!--<button v-if="isEditing" class="btn btn-default" v-on="click: cancel" title="Cancel editing and don't make any changes to {{title}}">
                     <i class="fa fa-remove"></i>&nbsp;&nbsp;Cancel
-                </button>
+                </button>-->
             </div>
         </div>
     </div>
     <div class="cleared" ></div>
     <div id="editor" v-class="editor: isEditing">
         <textarea v-model="pageContent"></textarea>
-        <div v-html="pageContent | marked"></div>
+        <div v-html="pageContent | marked" class="markdown-body"></div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

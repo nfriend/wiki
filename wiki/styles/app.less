@@ -1,4 +1,6 @@
-﻿html, body, #editor {
+﻿@import (less) 'github-markdown-styles.css';
+
+html, body, #editor {
     margin: 0;
     height: 100%;
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -74,12 +76,14 @@
     }
 
     div {
+        overflow: auto;
         left: 0;
         width: 98%;
         -moz-transition: width .25s ease-in-out;
         -o-transition: width .25s ease-in-out;
         -webkit-transition: width .25s ease-in-out;
         transition: width .25s ease-in-out;
+        margin-bottom: 100px;
     }
 
     textarea {
@@ -115,8 +119,4 @@
 
         width: 100%;
     }
-}
-
-code {
-    color: #f66;
 }

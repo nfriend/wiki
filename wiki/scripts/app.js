@@ -4,7 +4,7 @@ var pageName = isLocal ? getURLParameter('page') : decodeURI(location.pathname.s
 var vue = new Vue({
     el: '#app',
     data: {
-        pageContent: 'Here\'s a new page for you',
+        pageContent: '',
         isEditing: false,
         title: pageName
     },
@@ -53,16 +53,46 @@ var vue = new Vue({
 
         save: function () {
             this.isEditing = false;
+            var self = this;
+
+            $.ajax({
+                type: "POST",
+                url: 'server/save-page.php',
+                data: {
+                    pageName: pageName,
+                    pageContent: self.pageContent
+                },
+                success: function (response) {
+                    console.log('Page "' + pageName + '" successfully saved.');
+                },
+                error: function (response) {
+                    console.error('Page "' + pageName + '" failed to save!  Here\'s why: ' + response);
+                },
+                dataType: 'text'
+            });
         },
         edit: function () {
-            console.log('sdfsdf');
             this.isEditing = true;
         },
         cancel: function() {
             this.isEditing = false;
         },
         delete: function () {
-            
+            $.ajax({
+                type: "POST",
+                url: 'server/delete-page.php',
+                data: {
+                    pageName: pageName
+                },
+                success: function (response) {
+                    console.log('Page "' + pageName + '" successfully deleted.');
+                    vue.pageContent = '**Success.** "' + pageName + '" is now super gone.';
+                },
+                error: function (response) {
+                    console.error('Page "' + pageName + '" wasn\'t able to be deleted!  Here\'s why: ' + response);
+                },
+                dataType: 'text'
+            });
         },
         new: function () {
 
@@ -70,6 +100,7 @@ var vue = new Vue({
     }
 });
 
+// initialize the page's content
 $.ajax({
     type: "POST",
     url: 'server/get-page.php',
@@ -78,6 +109,9 @@ $.ajax({
     },
     success: function (response) {
         vue.pageContent = response;
+    },
+    error: function (response) {
+        vue.pageContent = '##Hmm.  Seems something went wrong!\n A page named "' + pageName + '" wasn\'t found.';
     },
     dataType: 'text'
 });
