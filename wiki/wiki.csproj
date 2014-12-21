@@ -62,6 +62,8 @@
       <DependentUpon>app.css</DependentUpon>
     </Content>
     <Content Include=".htaccess" />
+    <Content Include="server\save-page.php" />
+    <Content Include="server\delete-page.php" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -80,6 +82,7 @@
       <DependentUpon>app.css</DependentUpon>
     </Content>
     <Content Include="styles\bootstrap-buttons.min.css" />
+    <Content Include="styles\github-markdown-styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
